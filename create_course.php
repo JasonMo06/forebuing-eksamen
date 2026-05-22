@@ -12,10 +12,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
     $title = trim($_POST["title"]);
     $room = trim($_POST["room"]);
-    $date = trim($_POST["date"]);
+    $description = trim($_POST["description"]);
+    $course_date = trim($_POST["course_date"]);
 
-    $stmt = $conn->prepare("INSERT INTO courses (title, room, date) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $title, $room, $date);
+    $stmt = $conn->prepare("INSERT INTO courses (title, room, description, course_date) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $title, $room, $description, $course_date);
     $stmt->execute();
 }
 ?>
@@ -49,10 +50,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                         <option value="room 5">Room 5</option>
                     </select><br><br>
 
-                    <label for="date">Date:</label>
-                    <input type="date" name="date"><br><br>
+		    <label for="description">Description:</label>
+		    <input type="text" name="description"><br><br>
 
-                    <input type="submit" value="Create Course">
+                    <label for="course_date">Date:</label>
+                    <input type="date" name="course_date"><br><br>
+
+		    <button type="submit">Create Course</button>
                 </form>
             </div>
         </main>

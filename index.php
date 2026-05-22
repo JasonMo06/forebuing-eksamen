@@ -3,7 +3,7 @@ session_start();
 require_once "db/db.php";
 
 // Get course info
-$stmt = $conn->prepare("SELECT course_id, title, room, date FROM courses");
+$stmt = $conn->prepare("SELECT course_id, title, room, course_date FROM courses");
 $stmt->execute();
 $result = $stmt->get_result();
 ?>
@@ -44,7 +44,7 @@ $result = $stmt->get_result();
                         <tr>
                             <td><?= htmlspecialchars($row["title"]) ?></td>
                             <td><?= htmlspecialchars($row["room"]) ?></td>
-                            <td><?= htmlspecialchars($row["date"]) ?></td>
+                            <td><?= htmlspecialchars($row["course_date"]) ?></td>
 			    <td><a href="view_course.php?course_id=<?= htmlspecialchars($row["course_id"]) ?>">View Course</a></td>
                         </tr>
                         <?php endwhile; ?>
