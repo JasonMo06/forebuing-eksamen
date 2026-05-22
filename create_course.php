@@ -2,6 +2,7 @@
 session_start();
 require_once "db/db.php";
 
+// Restrict to admins only
 if (!isset($_SESSION["role"]))
 {
     header("Location: index.php");
@@ -13,14 +14,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     $title = trim($_POST["title"]);
     $room = trim($_POST["room"]);
     $description = trim($_POST["description"]);
+    $img = trim($_POST["img"]);
     $course_date = trim($_POST["course_date"]);
 
-    $stmt = $conn->prepare("INSERT INTO courses (title, room, description, course_date) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $title, $room, $description, $course_date);
-    $stmt->execute();
+    // Default fallback image if the input field was left blank
+    if (empty($img)) {
+        $img = "default.jpg";
+    }
+
+    // FIX 1: Changed 'Img' to lowercase 'img' to match your database column perfectly
+    $stmt = $conn->prepare("INSERT INTO courses (title, room, description, img, course_date) VALUES (?, ?, ?, ?, ?)");
+    
+    // FIX 2: Updated "ssss" to "sssss" because there are 5 values being bound
+    $stmt->bind_param("sssss", $title, $room, $description, $img, $course_date);
+    
+    if ($stmt->execute()) {
+        $_SESSION["message"] = "Course created successfully!";
+        header("Location: index.php");
+        exit();
+    } else {
+        echo "Database Error: " . $stmt->error;
+    }
+    
+    $stmt->close();
+    $conn->close();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,6 +71,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
 		    <label for="description">Description:</label>
 		    <input type="text" name="description"><br><br>
+
+		    <label for="img">Image path:</label>
+                    <input type="text" name="img"><br><br>
 
                     <label for="course_date">Date:</label>
                     <input type="date" name="course_date"><br><br>
