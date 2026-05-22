@@ -151,10 +151,22 @@ table {
     background: #ffffff;
 }
 
-th, td {
+/* 1. Target table cells specifically inside .inner-main */
+.inner-main th, 
+.inner-main td {
     padding: 14px 16px;
-    text-align: left;
+    text-align: center;      /* Centers text & inline elements horizontally */
+    vertical-align: middle;  /* Centers everything vertically */
     border-bottom: 1px solid #e5e7eb;
+}
+
+/* 2. Target images specifically inside table cells to beat global rules */
+.inner-main td table img,
+.inner-main td img {
+    display: block;
+    margin: 0 auto;          /* Clears the bottom 20px margin and centers horizontally */
+    width: 150px;
+    height: auto;            /* Ensures aspect ratio stays perfect */
 }
 
 th {
@@ -166,7 +178,6 @@ th {
 tr:hover {
     background-color: #f8fafc;
 }
-
 /* ==========================================================================
    5. COMPONENT: BUTTONS
    ========================================================================== */
@@ -219,6 +230,9 @@ form {
     margin-bottom: 6px;
     font-weight: 500;
     color: #374151;
+}
+.view-form {
+    margin: 0 0;
 }
 
 input[type="text"],

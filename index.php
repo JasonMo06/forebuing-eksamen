@@ -3,7 +3,7 @@ session_start();
 require_once "db/db.php";
 
 // Get course info
-$stmt = $conn->prepare("SELECT course_id, title, room, course_date FROM courses");
+$stmt = $conn->prepare("SELECT course_id, title, room, img, course_date FROM courses");
 $stmt->execute();
 $result = $stmt->get_result();
 ?>
@@ -34,6 +34,7 @@ $result = $stmt->get_result();
                     <h3>Courses</h3>
                     <table>
                         <tr>
+                            <th>Image</th>
                             <th>Title</th>
                             <th>Room</th>
                             <th>Date</th>
@@ -42,6 +43,7 @@ $result = $stmt->get_result();
 
                         <?php while ($row = $result->fetch_assoc()): ?>
                         <tr>
+			    <td><img src="assets/<?= htmlspecialchars($row["img"]) ?>"></td>
                             <td><?= htmlspecialchars($row["title"]) ?></td>
                             <td><?= htmlspecialchars($row["room"]) ?></td>
                             <td><?= htmlspecialchars($row["course_date"]) ?></td>
@@ -50,9 +52,9 @@ $result = $stmt->get_result();
                         <?php endwhile; ?>
                     </table>
 
-                    <?php if (isset($_SESSION["role"])): ?>
-                        <a href="create_course.php" class="btn btn-success">Create a course</a>
-                    <?php endif; ?>
+		    <?php if (isset($_SESSION["role"]) && $_SESSION["role"] != "customer"): ?>
+			<a href="create_course.php" class="btn btn-success">Create a course</a>
+		    <?php endif; ?>
                 </div>
             </div>
         </main>

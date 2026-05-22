@@ -2,18 +2,12 @@
 session_start();
 require_once "db/db.php";
 
-if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "admin")
-{
-    header("Location: index.php");
-    exit();
-}
-
 $error = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
     // Get form data
-    $role = trim($_POST["role"]);
+    $role = "costumer";
     $username = trim($_POST["username"]);
     $password = trim($_POST["password"]);
     $repeat_password = trim($_POST["repeat_password"]);
@@ -79,14 +73,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                 </div>
 
                 <form method="POST">
-                    <label>Role:</label><br>
-                    <select name="role">
-                        <option value="admin">Admin</option>
-                        <option value="tilsett">Tilsett</option>
-                        <option value="instructor">Instructor</option>
-                        <option value="customer">Customer</option>
-                    </select><br><br>
-
                     <label>Username:</label><br>
                     <input type="text" name="username" placeholder="Enter your username" required><br><br>
 
@@ -98,9 +84,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         
                     <button type="submit" class="btn btn-success">Register</button><br><br>
 
-                    <a href="index.php">Back to home page</a>
+                    <a href="login.php">Login</a><br>
+                    <a href="index.php">Back to Home Page</a>
                 </form>
             </div>
         </div>
     </body>
 </html>
+
