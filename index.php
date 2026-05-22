@@ -25,7 +25,7 @@ $result = $stmt->get_result();
                 <h1>Home page</h1>
                 <?php if ($_SESSION["role"] === "admin"): ?>
                     <h2>Welcome admin</h2>
-                    <a href="register.php">Register new user</a>
+                    <a href="register.php" class="btn btn-success">Register new user</a>
                 <?php else: ?>
                     <h1>Welcome user</h1>
                 <?php endif; ?>
@@ -51,7 +51,7 @@ $result = $stmt->get_result();
                     </table>
 
                     <?php if (isset($_SESSION["role"])): ?>
-                        <a href="create_course.php">Create a course</a>
+                        <a href="create_course.php" class="btn btn-success">Create a course</a>
                     <?php endif; ?>
                 </div>
             </div>

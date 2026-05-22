@@ -66,6 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Register</title>
+	<link rel="stylesheet" href="css/style.css">
     </head>
 
     <body>
@@ -94,7 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                     <label>Repeat password:</label><br>
                     <input type="password" name="repeat_password" placeholder="Please repeat your password" required><br><br>
         
-                    <button type="submit">Register</button><br><br>
+                    <button type="submit" class="btn btn-success">Register</button><br><br>
 
                     <a href="index.php">Back to home page</a>
                 </form>

@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Login</title>
-        <link rel="stylesheet" href="css/register_style.css">    
+	<link rel="stylesheet" href="css/style.css">
     </head>
 
     <body>
@@ -70,7 +70,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                     <label for="password">Password</label><br>
                     <input type="password" name="password" placeholder="Enter your password" required><br>
 
-                    <button type="submit">Login</button><br><br>
+                    <button type="submit" class="btn btn-success">Login</button><br><br>
+		    
+		    <a href="index.php">Back to Home Page</a>
                 </form>
             </div>
         </div>

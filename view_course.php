@@ -5,7 +5,7 @@ require_once "db/db.php";
 // Fetch and show course
 $course_id = $_GET["course_id"];
 
-$stmt = $conn->prepare("SELECT title, room, description, course_date FROM courses WHERE course_id = ?");
+$stmt = $conn->prepare("SELECT title, room, description, img, course_date FROM courses WHERE course_id = ?");
 $stmt->bind_param("i", $course_id);
 $stmt->execute();
 
@@ -70,7 +70,7 @@ if (isset($_SESSION["user_id"]) && $_SERVER["REQUEST_METHOD"] === "POST")
 
         <main>
             <div class="inner-main">
-                <img src="assets/ikt-kurs-image" width="1000px">
+		<img src="assets/<?= htmlspecialchars($row["img"]) ?>" width="1000px">
                 <h1><?= htmlspecialchars($row["title"]) ?></h1>
                 <h3>Room: <?= htmlspecialchars($row["room"]) ?></h3>
                 <p>Date: <?= htmlspecialchars($row["course_date"]) ?></p>
