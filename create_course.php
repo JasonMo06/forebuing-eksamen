@@ -56,6 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         <main>
             <div class="inner-main">
                 <h1>Create Course</h1>
+
                 <form method="POST">
                     <label for="title">Title:</label>
                     <input type="text" name="title"><br><br>
