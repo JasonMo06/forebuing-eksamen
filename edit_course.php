@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
     $img = $_POST["img"]; 
     $course_date = $_POST["course_date"]; 
 
-    // Use UPDATE to modify an existing record, not INSERT
+    // Use UPDATE to modify an existing record
     $stmt = $conn->prepare("UPDATE courses SET title = ?, room = ?, description = ?, img = ?, course_date = ? WHERE course_id = ?");
     $stmt->bind_param("sssssi", $title, $room, $description, $img, $course_date, $course_id);
     $stmt->execute();
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
     exit();
 }
 
-// Fetch current course values (doing this AFTER the POST check ensures we see the newly updated data)
+// Fetch current course values
 $stmt = $conn->prepare("SELECT title, room, description, img, course_date FROM courses WHERE course_id = ?");
 $stmt->bind_param("i", $course_id);
 $stmt->execute();

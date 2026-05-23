@@ -2,6 +2,15 @@
 session_start();
 require_once "db/db.php";
 
+$user_id = $_SESSION["user_id"];
+
+// Get username
+$stmt = $conn->prepare("SELECT username FROM users WHERE user_id = ?");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$row = $result->fetch_assoc();
+
 // Get course info
 $stmt = $conn->prepare("SELECT course_id, title, room, img, course_date FROM courses");
 $stmt->execute();
@@ -24,10 +33,10 @@ $result = $stmt->get_result();
             <div class="inner-main">
                 <h1>Home page</h1>
                 <?php if ($_SESSION["role"] === "admin"): ?>
-                    <h2>Welcome admin</h2>
+		    <h2>Welcome <?= htmlspecialchars($row["username"]) ?> (admin)</h2>
                     <a href="register.php" class="btn btn-success">Register new user</a>
                 <?php else: ?>
-                    <h1>Welcome user</h1>
+		    <h1>Welcome <?= htmlspecialchars($row["username"]) ?></h1>
                 <?php endif; ?>
 
                 <div class="courses">

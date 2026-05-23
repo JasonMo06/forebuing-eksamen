@@ -8,6 +8,7 @@
     </div>
 
     <div class="right-header">
+	<a href="edit_user.php">Edit profile</a>
         <a href="db/logout.php">Logout</a>
     </div>
 </div>
